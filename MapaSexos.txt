@@ -1,0 +1,11 @@
+No esta terminado y tiene errores a la hora de actualizar, aunque funciona je, si les sirve de algo adelante :D
+Archivos importantes a revisar:
+resources\src\crud.vue //El mas importante, donde usamos el Vue y Axios (Aprendan axios :c)
+resources\js\app.js //Donde definimos el esquema de vue, los paquetes a usar, definimos rutas y montamos los archivos vue
+resources\views\postit.blade.php //Donde se usa laravel, a destacar que donde tenemos la id 'crud' es donde se inserta el Vue
+routes\api.php //Donde trabajamos con las API y el controlador, hacemos uso de las funciones que hay ahi :p
+routes\web.php //Pues igual son rutas pero mas como para el Laravel
+.env //Solo se uso para definir el nombre de la BD y asi :D
+app\Models\postit.php //Si esta medio escueto pueden ver igual el que se llama User.php para que entiendan que es, se vera como instancia en los archivos mayormente
+app\Http\Controllers\PostItController.php //THE BOSS, como ven aqui se definen los procesos que hacemos uso en api.php (Vean que importamos el modelo postit)
+database\migrations\2023_10_02_041305_create_postits_table.php //Aqui es donde se genero la BD, cuando se corre (ay) la migracion se crea solito (php artisan)
