@@ -1,5 +1,5 @@
 <script setup>
-import {ref,computed} from 'vue'
+import {ref,computed, reactive} from 'vue'
     const postits = ref([]);
     const edit = ref(true)
     const create = ref(false)
@@ -18,14 +18,10 @@ import {ref,computed} from 'vue'
         })
       }
     }
-    const postit = ref({tarea:"",descripcion:""});
+    const postit = reactive({tarea:"",descripcion:""});
     const crear = computed( () => {
-        //console.log(postit.value)
-        axios.post('/api/postit',postit.value).then(response=>{
-          //$router.push({name:"Crud"});
+        axios.post('/api/postit',postit).then(response=>{
           mostrar()
-          alert('Nuevo registro agregado!')
-          //document.getElementById('formInputData').reset()
         }).catch(error=>{
             console.log(error)
         })
@@ -33,12 +29,8 @@ import {ref,computed} from 'vue'
     const editar = computed(() => { return edit.value })
     const creator = computed(() => { return create.value })
     const actualizar = computed(() => {
-      axios.put(`/api/postit/${id.value}`,postit.value).then(response=>{
-            //$router.push({name:"Mostrar"})
-              console.log(`/api/postit/${id.value}`,postit.value)
+      axios.put(`/api/postit/${id.value}`,postit).then(response=>{
               mostrar()
-              alert('Registro modificado!')
-              //document.getElementById('formInputData').reset()
         }).catch(error=>{
             console.log(error)
         })
@@ -48,8 +40,15 @@ import {ref,computed} from 'vue'
       postit.descripcion = document.getElementById('descripcion').value 
       edit.value = false
       create.value = true
+      //reiniciarForm
       return true
     })
+    /* En proceso xd
+    const reiniciarForm = computed(() => {
+      postit.tarea = ''
+      postit.descripcion = ''
+      return true
+    })*/
     function cargarEditor(tarea,descripcion,id_){
       document.getElementById('tarea').value = tarea
       document.getElementById('descripcion').value = descripcion
@@ -57,7 +56,6 @@ import {ref,computed} from 'vue'
     }
 </script>
 <template>
-    <form id="formInputData">
       <div class="mx-auto p-2 gap-3 crud-vue">
         <div class="input-group flex-nowrap p-2">
             <span class="input-group-text">Tarea</span>
@@ -70,7 +68,6 @@ import {ref,computed} from 'vue'
         <button :disabled="creator" @click='crear' class="btn btn-success position-relative top-0 start-50top-0 start-50"><i class="fa-solid fa-floppy-disk"></i></button>
         <button :disabled="editar" @click="actualizar" class="btn btn-info">Actualizar</button>
     </div>
-    </form>
     <div>
         <ol class="list-group list-group-numbered">
             <b>{{postits.value}}</b>
