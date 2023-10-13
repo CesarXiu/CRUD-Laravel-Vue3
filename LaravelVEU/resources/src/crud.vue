@@ -7,7 +7,6 @@ import {ref,computed, reactive} from 'vue'
     function mostrar(){
       axios.get('/api/postit').then(response=>{
       postits.value = response.data
-      //console.log('cargado',postits.value)
       }).catch(error=>{ postits.value = []})
     }
     mostrar()
@@ -31,6 +30,8 @@ import {ref,computed, reactive} from 'vue'
     const actualizar = computed(() => {
       axios.put(`/api/postit/${id.value}`,postit).then(response=>{
               mostrar()
+              edit.value = true
+              create.value = false
         }).catch(error=>{
             console.log(error)
         })
