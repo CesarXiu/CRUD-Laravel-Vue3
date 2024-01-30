@@ -55,6 +55,12 @@ import {ref,computed, reactive} from 'vue'
       document.getElementById('descripcion').value = descripcion
       id.value = id_
     }
+    //-----------------------------
+    function mostrarGroup(relation = ''){
+      axios.get('/api/group/'+relation).then(response=>{
+      console.log(response.data) 
+      }).catch(error=>{ console.error(error)})
+    }
 </script>
 <template>
       <div class="mx-auto p-2 gap-3 crud-vue">
@@ -82,6 +88,10 @@ import {ref,computed, reactive} from 'vue'
                 <span class="badge bg-primary rounded-pill">{{postitCharged.id}}</span>
               </li>
             </ol>
+    </div>
+    <div>
+      <div class="btn btn-danger" @click="mostrarGroup()">mostrar solo</div>
+      <div class="btn btn-danger" @click="mostrarGroup('?included=postit&filter[name]=X')">mostrar completo</div>
     </div>
 </template>
 <style>

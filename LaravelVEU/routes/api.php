@@ -19,3 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('postit',App\Http\Controllers\PostItController::class);//->only('index','store','update','destroy','show');
+Route::resource('group',App\Http\Controllers\GroupController::class);//->name('api.group');

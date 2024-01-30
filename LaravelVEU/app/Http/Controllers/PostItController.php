@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\models\postit;
+use App\models\postit; 
 
 class PostItController extends Controller
 {
