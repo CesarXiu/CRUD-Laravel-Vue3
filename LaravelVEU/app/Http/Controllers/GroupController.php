@@ -10,8 +10,8 @@ class GroupController extends Controller
 {
     public function store(Request $request){
         $request -> validate([
-            'tarea' => 'required|min:3',
-            'descripcion' => 'required'
+            'name' => 'required|min:3',
+            'postit_id' => 'required'
         ]);
         $group = group::create($request->post());
         return response()->json([
